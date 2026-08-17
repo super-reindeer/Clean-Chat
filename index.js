@@ -1,5 +1,22 @@
 require("dotenv").config();
 
+// ==========================================
+// RENDER WEB SERVER
+// ==========================================
+// Render Web Services expect an HTTP port.
+// This tiny server keeps the Discord bot compatible
+// with Render while the Discord Gateway stays connected.
+const http = require("http");
+
+const PORT = process.env.PORT || 3000;
+
+http.createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("CleanChat is online!");
+}).listen(PORT, () => {
+    console.log(`Web server listening on port ${PORT}`);
+});
+
 const {
     Client,
     GatewayIntentBits
